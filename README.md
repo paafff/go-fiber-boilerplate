@@ -2,31 +2,34 @@
 
 Berikut adalah struktur folder dari project ini:
 
+![image](https://github.com/user-attachments/assets/901d9747-48ae-4d9a-bb10-486cfc1354c8)
+
+
 app/
 ├── cmd/
-│ └── web/
-│ └── main.go
+│   └── web/
+│       └── main.go
 ├── internal/
-│ ├── config/
-│ │ └── config.go
-│ ├── domain/
-│ │ ├── models/
-│ │ │ └── user.go
-│ │ └── services/
-│ │ └── user_service.go
-│ ├── handlers/
-│ │ └── user_handler.go
-│ ├── infrastructure/
-│ │ ├── database/
-│ │ │ └── database.go
-│ │ ├── router/
-│ │ │ └── router.go
-│ │ └── logger/
-│ │ └── logger.go
-│ ├── repositories/
-│ │ └── user_repository.go
-│ └── routes/
-│ └── user_routes.go
+│   ├── config/
+│   │   └── config.go
+│   ├── domain/
+│   │   ├── models/
+│   │   │   └── user.go
+│   │   └── services/
+│   │       └── user_service.go
+│   ├── handlers/
+│   │   └── user_handler.go
+│   ├── infrastructure/
+│   │   ├── database/
+│   │   │   └── database.go
+│   │   ├── router/
+│   │   │   └── router.go
+│   │   └── logger/
+│   │       └── logger.go
+│   ├── repositories/
+│   │   └── user_repository.go
+│   └── routes/
+│       └── user_routes.go
 ├── pkg/
 │ └── utils/
 │ └── utils.go
