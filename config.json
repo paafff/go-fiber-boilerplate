@@ -1,0 +1,21 @@
+{
+  "app": {
+    "name": "fiber-app-paafff"
+  },
+  "web": {
+    "prefork": false,
+    "port": 3000
+  },
+  "log": {
+    "level": 6
+  },
+  "database": {
+    "username": "postgres",
+    "password": "paafff",
+    "host": "localhost",
+    "port": 5432,
+    "name": "db_gofiber",
+    "sslmode": "disable",
+    "timezone": "Asia/Shanghai"
+  }
+}

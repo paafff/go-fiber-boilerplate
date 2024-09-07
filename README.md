@@ -30,6 +30,7 @@ app/
 ├── pkg/
 │ └── utils/
 │ └── utils.go
+├── config.json
 ├── go.mod
 ├── go.sum
 └── README.md

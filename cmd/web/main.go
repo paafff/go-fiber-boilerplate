@@ -1,33 +1,39 @@
 package main
 
 import (
-    "fiber-app-paafff/internal/infrastructure/database"
-    "fiber-app-paafff/internal/infrastructure/router"
-    "fiber-app-paafff/internal/repositories"
-    "fiber-app-paafff/internal/domain/services"
-    "fiber-app-paafff/internal/handlers"
-    "github.com/gofiber/fiber/v2"
+	"fiber-app-paafff/internal/config"
+	"fiber-app-paafff/internal/domain/services"
+	"fiber-app-paafff/internal/handlers"
+	"fiber-app-paafff/internal/infrastructure/database"
+	"fiber-app-paafff/internal/infrastructure/router"
+	"fiber-app-paafff/internal/repositories"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-    // Inisialisasi database
-    database.InitDatabase()
 
-    // Inisialisasi repository
-    userRepository := repositories.NewUserRepository(database.DB)
+	// Load configuration
+	config.LoadConfig()
 
-    // Inisialisasi service
-    userService := services.NewUserService(userRepository)
+	// Inisialisasi database
+	database.InitDatabase()
 
-    // Inisialisasi handler
-    userHandler := handlers.NewUserHandler(userService)
+	// Inisialisasi repository
+	userRepository := repositories.NewUserRepository(database.DB)
 
-    // Inisialisasi Fiber
-    app := fiber.New()
+	// Inisialisasi service
+	userService := services.NewUserService(userRepository)
 
-    // Setup routes
-    router.SetupRoutes(app, userHandler)
+	// Inisialisasi handler
+	userHandler := handlers.NewUserHandler(userService)
 
-    // Jalankan server
-    app.Listen(":3000")
+	// Inisialisasi Fiber
+	app := fiber.New()
+
+	// Setup routes
+	router.SetupRoutes(app, userHandler)
+
+	// Jalankan server
+	app.Listen(":3000")
 }
