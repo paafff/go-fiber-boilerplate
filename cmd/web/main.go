@@ -19,6 +19,9 @@ func main() {
 	// Inisialisasi database
 	database.InitDatabase()
 
+	// Seed dummy data
+	database.SeedUsers(database.DB, 10) // Seed 10 users
+
 	// Inisialisasi repository
 	userRepository := repositories.NewUserRepository(database.DB)
 

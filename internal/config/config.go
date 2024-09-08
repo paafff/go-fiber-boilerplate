@@ -39,7 +39,7 @@ func LoadConfig() {
 	log.Printf("Current working directory: %s", wd)
 
 	// Open the config file
-	file, err := os.Open("../../config.json")
+	file, err := os.Open("config.json")
 	if err != nil {
 		log.Fatalf("Cannot open config file: %v", err)
 	}
