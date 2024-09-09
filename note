@@ -1,0 +1,53 @@
+Tentu, berikut adalah penjelasan urutan layer dalam struktur proyek Anda ketika melakukan operasi POST atau GET:
+
+1. Router
+File: internal/infrastructure/router/router.go
+Fungsi: Router bertanggung jawab untuk mendefinisikan rute-rute HTTP dan mengarahkan permintaan ke handler yang sesuai.
+Contoh: Ketika Anda melakukan permintaan POST ke /users, router akan mengarahkan permintaan ini ke handler yang sesuai.
+2. Routes
+File: internal/routes/user_routes.go
+Fungsi: File ini mendefinisikan rute spesifik untuk entitas tertentu, seperti pengguna (users).
+Contoh: Di dalam user_routes.go, Anda akan mendefinisikan rute seperti app.Post("/users", userHandler.CreateUser).
+3. Handlers
+File: internal/handlers/user_handler.go
+Fungsi: Handler bertanggung jawab untuk menangani logika permintaan HTTP. Di sini, Anda akan mem-parsing permintaan, memvalidasi data, dan memanggil service yang sesuai.
+Contoh: CreateUser handler akan mem-parsing data pengguna dari permintaan POST, melakukan hash password, dan memanggil service untuk membuat pengguna baru.
+4. Services
+File: internal/domain/services/user_service.go
+Fungsi: Service berisi logika bisnis aplikasi. Service akan memanggil repository untuk berinteraksi dengan database.
+Contoh: CreateUser service akan memanggil repository untuk menyimpan data pengguna ke database.
+5. Repositories
+File: internal/repositories/user_repository.go
+Fungsi: Repository bertanggung jawab untuk berinteraksi dengan database. Ini adalah lapisan yang mengabstraksi akses data.
+Contoh: CreateUser repository akan menggunakan ORM (misalnya GORM) untuk menyimpan data pengguna ke database.
+6. Models
+File: internal/domain/models/user.go
+Fungsi: Model mendefinisikan struktur data yang akan disimpan di database.
+Contoh: User model mendefinisikan field seperti ID, Name, Email, Password, CreatedAt, dan UpdatedAt.
+7. Config
+File: internal/config/config.go dan config.json
+Fungsi: File konfigurasi digunakan untuk mengatur pengaturan aplikasi seperti koneksi database, port server, dll.
+Contoh: config.go akan memuat konfigurasi dari config.json.
+
+Alur Permintaan POST/GET:
+Permintaan dari Klien: Klien mengirimkan permintaan HTTP (misalnya POST /users).
+Router: Permintaan diterima oleh router (router.go), yang mengarahkan permintaan ke rute yang sesuai di user_routes.go.
+Routes: Rute di user_routes.go mengarahkan permintaan ke handler yang sesuai di user_handler.go.
+Handlers: Handler di user_handler.go mem-parsing permintaan, memvalidasi data, dan memanggil service di user_service.go.
+Services: Service di user_service.go berisi logika bisnis dan memanggil repository di user_repository.go.
+Repositories: Repository di user_repository.go berinteraksi dengan database menggunakan model di user.go.
+Database: Data disimpan atau diambil dari database sesuai dengan permintaan.
+
+
+
+
+Contoh Alur POST /users:
+Klien: Mengirimkan permintaan POST ke /users dengan data pengguna.
+Router: Menerima permintaan dan mengarahkan ke user_routes.go.
+Routes: user_routes.go mengarahkan ke CreateUser handler di user_handler.go.
+Handlers: CreateUser handler mem-parsing data, melakukan hash password, dan memanggil CreateUser service di user_service.go.
+Services: CreateUser service memanggil CreateUser repository di user_repository.go.
+Repositories: CreateUser repository menyimpan data pengguna ke database menggunakan model User.
+Database: Data pengguna disimpan di database.
+
+Dengan struktur ini, Anda memiliki pemisahan tanggung jawab yang jelas antara berbagai lapisan aplikasi, yang membuat kode lebih terorganisir dan mudah untuk dikelola.

@@ -7,36 +7,59 @@ import (
 	"fiber-app-paafff/internal/infrastructure/database"
 	"fiber-app-paafff/internal/infrastructure/router"
 	"fiber-app-paafff/internal/repositories"
+	"fmt"
+	"log"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-
 	// Load configuration
 	config.LoadConfig()
+	log.Println("Configuration loaded")
 
 	// Inisialisasi database
 	database.InitDatabase()
+	log.Println("Database initialized")
 
-	// Seed dummy data
-	database.SeedUsers(database.DB, 10) // Seed 10 users
+	// Handle command line arguments
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "seed":
+			database.SeedUsers(database.DB, 10)
+			fmt.Println("Seeded 10 users")
+			return
+		case "reset-db":
+			database.ResetDatabase(database.DB)
+			fmt.Println("Database reset.")
+			return
+		}
+	}
 
 	// Inisialisasi repository
 	userRepository := repositories.NewUserRepository(database.DB)
+	log.Println("User repository initialized")
 
 	// Inisialisasi service
 	userService := services.NewUserService(userRepository)
+	log.Println("User service initialized")
 
 	// Inisialisasi handler
 	userHandler := handlers.NewUserHandler(userService)
+	log.Println("User handler initialized")
 
 	// Inisialisasi Fiber
 	app := fiber.New()
+	log.Println("Fiber app initialized")
 
 	// Setup routes
 	router.SetupRoutes(app, userHandler)
+	log.Println("Routes set up")
 
 	// Jalankan server
-	app.Listen(":3000")
+	log.Println("Starting server on port 5000")
+	if err := app.Listen(":5000"); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
 }
