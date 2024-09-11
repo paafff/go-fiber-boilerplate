@@ -31,22 +31,8 @@ func (h *UserHandler) GetUser(c *fiber.Ctx) error {
 	return c.JSON(user)
 }
 
-// func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
-// 	user := new(models.User)
-// 	if err := c.BodyParser(user); err != nil {
-// 		return c.Status(fiber.StatusBadRequest).SendString("Invalid request payload")
-// 	}
-
-// 	createdUser, err := h.userService.CreateUser(user)
-// 	if err != nil {
-// 		return c.Status(fiber.StatusInternalServerError).SendString("Could not create user")
-// 	}
-
-// 	return c.Status(fiber.StatusCreated).JSON(createdUser)
-// }
-
 func (h *UserHandler) CreateUser(c *fiber.Ctx) error {
-	
+
 	user := new(models.User)
 	if err := c.BodyParser(user); err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString("Invalid request payload")
@@ -108,3 +94,22 @@ func (h *UserHandler) ListUsers(c *fiber.Ctx) error {
 
 	return c.JSON(users)
 }
+
+
+// func ( h *UserHandler) Login(c *fiber.Ctx) error {
+// 	login := new(models.Login)
+// 	if err := c.BodyParser(login); err != nil {
+// 		return c.Status(fiber.StatusBadRequest).SendString("Invalid request payload")
+// 	}
+
+// 	user, err := h.userService.GetUserByEmail(login.Email)
+// 	if err != nil {
+// 		return c.Status(fiber.StatusNotFound).SendString("User not found")
+// 	}
+
+// 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(login.Password)); err != nil {
+// 		return c.Status(fiber.StatusUnauthorized).SendString("Invalid password")
+// 	}
+
+// 	return c.JSON(user)
+// }

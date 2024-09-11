@@ -28,12 +28,17 @@ app/
 │   │       └── logger.go
 │   ├── repositories/
 │   │   └── user_repository.go
-│   └── routes/
-│       └── user_routes.go
+│   ├── routes/
+│   │   └── user_routes.go
+│   └── auth/
+│       ├── auth_handler.go
+│       ├── auth_service.go
+│       └── auth_middleware.go
 ├── pkg/
-│ └── utils/
-│ └── utils.go
+│   └── utils/
+│       └── utils.go
 ├── config.json
+├── Makefile
 ├── go.mod
 ├── go.sum
 └── README.md

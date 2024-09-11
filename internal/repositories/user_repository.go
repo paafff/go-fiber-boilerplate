@@ -59,3 +59,11 @@ func (r *UserRepository) ListUsers() ([]models.User, error) {
 	}
 	return users, nil
 }
+
+func (r *UserRepository) GetUserByEmail(email string) (*models.User, error) {
+	var user models.User
+	if err := r.db.Where("email = ?", email).First(&user).Error; err != nil {
+		return nil, err
+	}
+	return &user, nil
+}
