@@ -29,6 +29,6 @@ func (s *UserService) DeleteUser(id uint) error {
     return s.userRepository.DeleteUser(id)
 }
 
-func (s *UserService) ListUsers() ([]models.User, error) {
-    return s.userRepository.ListUsers()
+func (s *UserService) GetUsers() ([]models.User, error) {
+    return s.userRepository.GetUsers()
 }

@@ -11,3 +11,7 @@ seed:
 # Reset database
 reset-db:
 	go run cmd/web/main.go reset-db
+
+
+# clean-run (reset database, seed data, and run application)
+clean-run: reset-db seed run	

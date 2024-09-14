@@ -51,8 +51,8 @@ func (r *UserRepository) DeleteUser(id uint) error {
 	return nil
 }
 
-// ListUsers retrieves all users from the database
-func (r *UserRepository) ListUsers() ([]models.User, error) {
+// GetUsers retrieves all users from the database
+func (r *UserRepository) GetUsers() ([]models.User, error) {
 	var users []models.User
 	if err := r.db.Find(&users).Error; err != nil {
 		return nil, err

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fiber-app-paafff/internal/auth"
 	"fiber-app-paafff/internal/config"
 	"fiber-app-paafff/internal/domain/services"
 	"fiber-app-paafff/internal/handlers"
@@ -43,23 +44,33 @@ func main() {
 
 	// Inisialisasi service
 	userService := services.NewUserService(userRepository)
-	log.Println("User service initialized")
+	authService := auth.NewAuthService(userRepository)
+	log.Println("User service and Auth service initialized")
 
 	// Inisialisasi handler
 	userHandler := handlers.NewUserHandler(userService)
-	log.Println("User handler initialized")
+	authHandler := auth.NewAuthHandler(authService)
+	log.Println("User handler and Auth handler initialized")
+
+	// // Inisialisasi service
+	// userService := services.NewUserService(userRepository)
+	// log.Println("User service initialized")
+
+	// // Inisialisasi handler
+	// userHandler := handlers.NewUserHandler(userService)
+	// log.Println("User handler initialized")
 
 	// Inisialisasi Fiber
 	app := fiber.New()
 	log.Println("Fiber app initialized")
 
 	// Setup routes
-	router.SetupRoutes(app, userHandler)
+	router.SetupRoutes(app, userHandler, authHandler)
 	log.Println("Routes set up")
 
 	// Jalankan server
 	log.Println("Starting server on port 5000")
-	if err := app.Listen(":5000"); err != nil {
+	if err := app.Listen(":3000"); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
 }

@@ -86,8 +86,8 @@ func (h *UserHandler) DeleteUser(c *fiber.Ctx) error {
 	return c.SendStatus(fiber.StatusNoContent)
 }
 
-func (h *UserHandler) ListUsers(c *fiber.Ctx) error {
-	users, err := h.userService.ListUsers()
+func (h *UserHandler) GetUsers(c *fiber.Ctx) error {
+	users, err := h.userService.GetUsers()
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).SendString("Could not retrieve users")
 	}
