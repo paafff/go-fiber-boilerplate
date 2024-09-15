@@ -18,6 +18,16 @@ func NewAuthService(userRepo *repositories.UserRepository) *AuthService {
 	return &AuthService{userRepo: userRepo}
 }
 
+func (s *AuthService) Register(user *models.User) (*models.User, error) {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return nil, err
+	}
+
+	user.Password = string(hashedPassword)
+	return s.userRepo.CreateUser(user)
+}
+
 func (s *AuthService) Authenticate(email, password string) (*models.User, error) {
 	user, err := s.userRepo.GetUserByEmail(email)
 	if err != nil {
