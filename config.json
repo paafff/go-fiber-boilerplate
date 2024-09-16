@@ -17,5 +17,6 @@
     "name": "db_gofiber",
     "sslmode": "disable",
     "timezone": "Asia/Shanghai"
-  }
+  },
+  "jwt_secret": "rahasia-paafff"
 }

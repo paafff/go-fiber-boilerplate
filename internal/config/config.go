@@ -26,6 +26,7 @@ type Config struct {
 		SSLMode  string `json:"sslmode"`
 		TimeZone string `json:"timezone"`
 	} `json:"database"`
+	JWTSecret string `json:"jwt_secret"`
 }
 
 var AppConfig Config

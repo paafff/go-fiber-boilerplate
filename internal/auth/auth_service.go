@@ -2,8 +2,10 @@ package auth
 
 import (
 	"errors"
+	"fiber-app-paafff/internal/config"
 	"fiber-app-paafff/internal/domain/models"
 	"fiber-app-paafff/internal/repositories"
+	"fmt"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
@@ -49,6 +51,7 @@ func (s *AuthService) GenerateJWT(user *models.User) (string, error) {
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	secret := "rahasia-paafff" // Replace with your secret key
+	secret := config.AppConfig.JWTSecret // Replace with your secret key
+	fmt.Println(secret)
 	return token.SignedString([]byte(secret))
 }
