@@ -12,8 +12,8 @@
   "database": {
     "username": "postgres",
     "password": "sqlpaafff",
-    "host": "localhost",
-    "port": 5432,
+    "host": "host.docker.internal",
+    "port": 5433,
     "name": "db_gofiber",
     "sslmode": "disable",
     "timezone": "Asia/Shanghai"
