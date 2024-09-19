@@ -2,8 +2,11 @@ package config
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
+
+	"github.com/lpernett/godotenv"
 )
 
 type Config struct {
@@ -32,6 +35,19 @@ type Config struct {
 var AppConfig Config
 
 func LoadConfig() {
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	env := os.Getenv("APP_ENV")
+	if env == "" {
+		env = "development"
+	}
+
+	fmt.Println("Environment: ", env)
+
 	// Log the current working directory
 	wd, err := os.Getwd()
 	if err != nil {
@@ -40,18 +56,25 @@ func LoadConfig() {
 	log.Printf("Current working directory: %s", wd)
 
 	// Open the config file
-	file, err := os.Open("config.json")
+	// file, err := os.Open("config.json")
+	// if err != nil {
+	// 	log.Fatalf("Cannot open config file: %v", err)
+	// }
+	// defer func() {
+	// 	if err := file.Close(); err != nil {
+	// 		log.Fatalf("Cannot close config file: %v", err)
+	// 	}
+	// }()
+
+	fileName := "config." + env + ".json"
+	configFile, err := os.Open(fileName)
 	if err != nil {
 		log.Fatalf("Cannot open config file: %v", err)
 	}
-	defer func() {
-		if err := file.Close(); err != nil {
-			log.Fatalf("Cannot close config file: %v", err)
-		}
-	}()
+	defer configFile.Close()
 
 	// Decode the config file
-	decoder := json.NewDecoder(file)
+	decoder := json.NewDecoder(configFile)
 	err = decoder.Decode(&AppConfig)
 	if err != nil {
 		log.Fatalf("Cannot decode config JSON: %v", err)

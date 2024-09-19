@@ -6,6 +6,7 @@
     "prefork": false,
     "port": 3000
   },
+
   "log": {
     "level": 6
   },

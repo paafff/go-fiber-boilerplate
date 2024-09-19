@@ -35,7 +35,12 @@ WORKDIR /app
 COPY --from=builder /app/main .
 
 # Copy the config file
-COPY config.json .
+# COPY config.json .
+COPY .env .
+
+# Copy the config files
+COPY config.development.json .
+COPY config.production.json .
 
 # Expose the port the app runs on
 EXPOSE 3000
