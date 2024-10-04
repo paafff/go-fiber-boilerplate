@@ -69,7 +69,7 @@ func main() {
 	log.Println("Routes set up")
 
 	// Jalankan server
-	log.Println("Starting server on port 5000")
+	log.Println("Server running on port 3000")
 	if err := app.Listen(":3000"); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
