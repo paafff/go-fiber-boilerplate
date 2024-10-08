@@ -20,16 +20,18 @@ type Config struct {
 	Log struct {
 		Level int `json:"level"`
 	} `json:"log"`
-	Database struct {
-		Username string `json:"username"`
-		Password string `json:"password"`
-		Host     string `json:"host"`
-		Port     int    `json:"port"`
-		Name     string `json:"name"`
-		SSLMode  string `json:"sslmode"`
-		TimeZone string `json:"timezone"`
-	} `json:"database"`
-	JWTSecret string `json:"jwt_secret"`
+	Database  DatabaseConfig `json:"database"`
+	JWTSecret string         `json:"jwt_secret"`
+}
+
+type DatabaseConfig struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Host     string `json:"host"`
+	Port     int    `json:"port"`
+	Name     string `json:"name"`
+	SSLMode  string `json:"sslmode"`
+	TimeZone string `json:"timezone"`
 }
 
 var AppConfig Config

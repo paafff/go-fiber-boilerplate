@@ -13,7 +13,7 @@
   "database": {
     "username": "postgres",
     "password": "sqlpaafff",
-    "host": "47.245.88.211",
+    "host": "host.docker.internal",
     "port": 5433,
     "name": "db_gofiber",
     "sslmode": "disable",
