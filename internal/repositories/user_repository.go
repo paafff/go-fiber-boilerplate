@@ -60,6 +60,7 @@ func (r *UserRepository) GetUsers() ([]models.User, error) {
 	return users, nil
 }
 
+// GetUserByEmail retrieves a user by email from the database
 func (r *UserRepository) GetUserByEmail(email string) (*models.User, error) {
 	var user models.User
 	if err := r.db.Where("email = ?", email).First(&user).Error; err != nil {
