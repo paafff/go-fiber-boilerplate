@@ -38,7 +38,12 @@ pipeline {
 
         stage('Run Docker Compose') {
             steps {
-                sh 'docker-compose -f /go-fiber-boilerplate/docker-compose.yml up -d --build'
+
+                // -f: Opsi ini digunakan untuk menentukan file docker-compose.yml yang akan digunakan.
+                sh 'docker-compose -f /root/go-fiber-boilerplate/docker-compose.yml down' 
+
+                // -d: Opsi ini digunakan untuk menjalankan container dalam mode detached. Artinya, container akan berjalan di latar belakang dan Anda akan mendapatkan kontrol terminal kembali setelah perintah dijalankan.
+                sh 'docker-compose -f /root/go-fiber-boilerplate/docker-compose.yml up -d --build'
             }
         }
     }
