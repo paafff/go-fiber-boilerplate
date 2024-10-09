@@ -36,6 +36,8 @@ pipeline {
         //     }
         // }
 
+
+//tes sudo
         stage('Run Docker Compose') {
             steps {
 
