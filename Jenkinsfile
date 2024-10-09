@@ -38,7 +38,7 @@ pipeline {
 
         stage('Run Docker Compose') {
             steps {
-                sh 'docker-compose -f /path/to/your/docker-compose.yml up -d --build'
+                sh 'docker-compose -f /go-fiber-boilerplate/docker-compose.yml up -d --build'
             }
         }
     }
