@@ -46,8 +46,12 @@ COPY config.production.json .
 COPY wait-for-it.sh .
 RUN chmod +x wait-for-it.sh
 
+# Debugging step: List files in the directory
+RUN ls -l
+
 # Expose the port the app runs on
 EXPOSE 3000
 
 # Run the application
 CMD ["./wait-for-it.sh", "postgres:5432","./main"]
+# CMD ["./main"]
